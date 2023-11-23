@@ -5,4 +5,16 @@
 body,
 button {
   font-family: "Kumbh Sans", sans-serif;
+  position: relative;
+}
+
+h2,
+h3,
+button {
+  font-weight: 700;
+}
+
+li,
+p {
+  font-weight: 400;
 }
