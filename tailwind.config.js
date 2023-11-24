@@ -8,8 +8,6 @@ export default {
     extend: {
       backgroundImage: {
         mobile: "url(assets/other/bg-header-mobile.svg)",
-        tablet: "url(assets/other/bg-header-tablet.svg)",
-        desktop: "url(assets/other/bg-header-desktop.svg)",
       },
       colors: {
         purple: "#5964E0",

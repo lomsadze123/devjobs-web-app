@@ -2,7 +2,7 @@ import logo from "../assets/other/logo.svg";
 
 const Header = () => {
   return (
-    <header className="bg-mobile flex justify-between px-6 pt-8 pb-[76px]">
+    <header className="bg-mobile flex justify-between px-6 md:px-28 pt-8 pb-[76px] md:rounded-bl-[100px]">
       <img src={logo} alt="dev jobs logo icon" />
       <svg
         xmlns="http://www.w3.org/2000/svg"

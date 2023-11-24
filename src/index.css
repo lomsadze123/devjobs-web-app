@@ -10,7 +10,8 @@ button {
 
 h2,
 h3,
-button {
+button,
+a {
   font-weight: 700;
 }
 
