@@ -9,10 +9,10 @@ export interface WithNull {
 const Main = ({ data }: WithNull) => {
   return (
     <main>
-      <div className="mt-[57px] flex justify-center gap-[49px] md:gap-[30px] flex-wrap max-w-[1217px] mx-auto">
+      <div className="mt-[57px] flex justify-center gap-[49px] md:gap-x-[30px] flex-wrap max-w-[1217px] mx-auto">
         {data?.map((items) => (
           <Link to={`/job/${items.id}`} key={items.id}>
-            <div className="bg-white text-darkGrey pl-6 pb-9 rounded-md w-[350px]">
+            <div className="bg-white text-darkGrey pl-6 pb-9 rounded-md w-[350px] group">
               <img
                 className="w-[50px] h-auto inline-block mt-[-27.5px]"
                 src={Logos[items.company.toLowerCase()]}
@@ -22,7 +22,7 @@ const Main = ({ data }: WithNull) => {
                 <li>{items.postedAt}</li>
                 <li className="list-disc">{items.contract}</li>
               </ul>
-              <h2 className="text-veryDarkBlue my-[10px] text-xl">
+              <h2 className="text-veryDarkBlue my-[10px] text-xl group-hover:text-darkGrey">
                 {items.position}
               </h2>
               <p>{items.company}</p>
@@ -31,7 +31,7 @@ const Main = ({ data }: WithNull) => {
           </Link>
         ))}
       </div>
-      <button className="py-4 px-[30px] bg-purple rounded-[5px] max-w-[141px] w-full mx-auto text-white block mt-8 md:mt-[56px]">
+      <button className="py-4 px-[30px] bg-purple rounded-[5px] max-w-[141px] w-full mx-auto text-white block mt-8 md:mt-[56px] hover:bg-[#939BF4]">
         Load More
       </button>
     </main>

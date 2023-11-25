@@ -11,8 +11,21 @@ const Header = () => {
         viewBox="0 0 112 24"
         fill="none"
       >
-        <rect x="36" width="48" height="24" rx="12" fill="white" />
-        <circle cx="48" cy="12" r="7" fill="#5964E0" />
+        <rect
+          x="36"
+          width="48"
+          height="24"
+          rx="12"
+          fill="white"
+          className="cursor-pointer"
+        />
+        <circle
+          cx="48"
+          cy="12"
+          r="7"
+          fill="#5964E0"
+          className="cursor-pointer"
+        />
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -31,11 +44,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// <a
-//         href="https://open.spotify.com/playlist/049zhJ0C72DDx7bzJwQN2Z?si=5c118e54477d414a&nd=1&dlsi=5faea799fa5548e7"
-//         target="_blank"
-//         rel="noreferrer noopener"
-//       >
-//         Header
-//       </a>

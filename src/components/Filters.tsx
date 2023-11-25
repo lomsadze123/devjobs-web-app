@@ -65,7 +65,7 @@ const Filters = ({ width }: { width: boolean }) => {
           </div>
           <div className="px-6 w-full md:p-0 md:ml-[26px] md:w-[19%]">
             <button
-              className="w-full bg-purple rounded-[5px] py-4 text-white md:max-w-[123px] md:px-2"
+              className="w-full bg-purple rounded-[5px] py-4 text-white md:max-w-[123px] md:px-2 hover:bg-[#939BF4]"
               type="submit"
             >
               Search
