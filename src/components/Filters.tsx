@@ -1,12 +1,49 @@
+import React, { useState } from "react";
 import location from "../assets/other/icon-location.svg";
 import filterIcon from "../assets/other/icon-filter.svg";
-import { useState } from "react";
 
-const Filters = ({ width }: { width: boolean }) => {
+const Filters = ({
+  width,
+  setSearch,
+}: {
+  width: boolean;
+  setSearch: React.Dispatch<
+    React.SetStateAction<{
+      title: string;
+      location: string;
+      fullTime: boolean;
+    }>
+  >;
+}) => {
   const [popup, setPopup] = useState(false);
+  const [filters, setFilters] = useState({
+    title: "",
+    location: "",
+    fullTime: false,
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearch((prevSearch) => ({
+      ...prevSearch,
+      title: filters.title,
+    }));
+    setSearch((prevSearch) => ({
+      ...prevSearch,
+      location: filters.location,
+    }));
+    setSearch((prevSearch) => ({
+      ...prevSearch,
+      fullTime: filters.fullTime,
+    }));
+    setPopup(false);
+  };
 
   return (
-    <form className="py-4 pl-6 pr-4 bg-white text-veryDarkBlue mt-[-40px] rounded-md md:mx-6 lg:mx-auto max-w-[1115px] md:flex md:items-center md:justify-center md:px-6 md:py-0">
+    <form
+      onSubmit={handleSubmit}
+      className="py-4 pl-6 pr-4 bg-white text-veryDarkBlue mt-[-40px] rounded-md md:mx-6 lg:mx-auto max-w-[1115px] md:flex md:items-center md:justify-center md:px-6 md:py-0"
+    >
       <div className="flex flex-row-reverse justify-center items-center md:flex-row md:gap-4 md:border-r-[1px] md:border-[rgba(110, 128, 152, 0.2)] md:w-[301px] md:py-7">
         <div className="p-[10px] bg-purple md:bg-white rounded md:p-0">
           <svg
@@ -32,6 +69,12 @@ const Filters = ({ width }: { width: boolean }) => {
           alt="filter icon"
         />
         <input
+          onChange={(e) =>
+            setFilters((prevFilter) => ({
+              ...prevFilter,
+              title: e.target.value,
+            }))
+          }
           className="outline-0 w-full"
           type="text"
           placeholder="Filter by title…"
@@ -48,6 +91,12 @@ const Filters = ({ width }: { width: boolean }) => {
           <div className="flex gap-4 p-6 border-b-[1px] border-[rgba(110, 128, 152, 0.2)] md:pr-0 md:border-0 md:border-r-[1px] md:py-[27px] md:pl-[23px]">
             <img src={location} alt="location icon" />
             <input
+              onChange={(e) =>
+                setFilters((prevFilter) => ({
+                  ...prevFilter,
+                  location: e.target.value,
+                }))
+              }
               className="outline-0 max-w-[320px] w-[70vw] md:w-full"
               type="text"
               placeholder="Filter by location…"
@@ -55,6 +104,12 @@ const Filters = ({ width }: { width: boolean }) => {
           </div>
           <div className="flex gap-3 p-6 md:p-0 md:w-[176px] md:pl-8">
             <input
+              onChange={(e) =>
+                setFilters((prevFilter) => ({
+                  ...prevFilter,
+                  fullTime: e.target.checked,
+                }))
+              }
               className="appearance-none w-6 h-6 bg-withOpacity checked:bg-purple checked:after:content-['✔']
               checked:after:text-white checked:after:ml-[6.5px] cursor-pointer"
               type="checkbox"

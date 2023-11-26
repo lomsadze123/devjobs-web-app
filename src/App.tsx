@@ -10,6 +10,11 @@ import Job from "./components/Job";
 const App = () => {
   const [data, setData] = useState<DataType[] | null>(null);
   const [width, setWidth] = useState(false);
+  const [search, setSearch] = useState({
+    title: "",
+    location: "",
+    fullTime: false,
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -37,12 +42,14 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F4F6F8] overflow-hidden pb-4">
+    <div className="min-h-screen bg-[#F4F6F8] overflow-hidden pb-4 md:pb-8">
       <Header />
       <div className="px-6 md:p-0">
-        {location.pathname === "/" && <Filters width={width} />}
+        {location.pathname === "/" && (
+          <Filters width={width} setSearch={setSearch} />
+        )}
         <Routes>
-          <Route path="/" element={<Main data={data} />} />
+          <Route path="/" element={<Main data={data} search={search} />} />
           <Route path="/job/:id" element={<Job data={data} />} />
         </Routes>
       </div>
