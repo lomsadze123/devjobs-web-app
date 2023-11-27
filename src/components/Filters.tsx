@@ -5,8 +5,10 @@ import filterIcon from "../assets/other/icon-filter.svg";
 const Filters = ({
   width,
   setSearch,
+  mode,
 }: {
   width: boolean;
+  mode: string;
   setSearch: React.Dispatch<
     React.SetStateAction<{
       title: string;
@@ -42,10 +44,16 @@ const Filters = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="py-4 pl-6 pr-4 bg-white text-veryDarkBlue mt-[-40px] rounded-md md:mx-6 lg:mx-auto max-w-[1115px] md:flex md:items-center md:justify-center md:px-6 md:py-0"
+      className={`py-4 pl-6 pr-4 ${
+        mode === "light" ? "bg-white" : "bg-veryDarkBlue"
+      } text-veryDarkBlue mt-[-40px] rounded-md md:mx-6 lg:mx-auto max-w-[1115px] md:flex md:items-center md:justify-center md:px-6 md:py-0`}
     >
-      <div className="flex flex-row-reverse justify-center items-center md:flex-row md:gap-4 md:border-r-[1px] md:border-[rgba(110, 128, 152, 0.2)] md:w-[301px] md:py-7">
-        <div className="p-[10px] bg-purple md:bg-white rounded md:p-0">
+      <div className="flex flex-row-reverse justify-center items-center md:flex-row md:gap-4 md:border-r-[1px] md:border-darkGrey md:border-opacity-20 md:w-[301px] md:py-7">
+        <div
+          className={`p-[10px] bg-purple ${
+            mode === "light" ? "md:bg-white" : "md:bg-veryDarkBlue"
+          } rounded md:p-0`}
+        >
           <svg
             className="p-[2px] md:p-0"
             xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +83,11 @@ const Filters = ({
               title: e.target.value,
             }))
           }
-          className="outline-0 w-full"
+          className={`outline-0 w-full ${
+            mode === "light"
+              ? "bg-white text-veryDarkBlue"
+              : "bg-veryDarkBlue text-white"
+          }`}
           type="text"
           placeholder="Filter by title…"
         />
@@ -87,8 +99,12 @@ const Filters = ({
             : "hidden md:block md:w-[551px]"
         }`}
       >
-        <div className="bg-white rounded-md pb-6 md:flex md:items-center md:p-0">
-          <div className="flex gap-4 p-6 border-b-[1px] border-[rgba(110, 128, 152, 0.2)] md:pr-0 md:border-0 md:border-r-[1px] md:py-[27px] md:pl-[23px]">
+        <div
+          className={` ${
+            mode === "light" ? "bg-white" : "bg-veryDarkBlue"
+          } rounded-md pb-6 md:flex md:items-center md:p-0`}
+        >
+          <div className="flex gap-4 p-6 border-b-[1px] border-darkGrey border-opacity-20 md:pr-0 md:border-0 md:border-r-[1px] md:py-[27px] md:pl-[23px]">
             <img src={location} alt="location icon" />
             <input
               onChange={(e) =>
@@ -97,7 +113,11 @@ const Filters = ({
                   location: e.target.value,
                 }))
               }
-              className="outline-0 max-w-[320px] w-[70vw] md:w-full"
+              className={`outline-0 max-w-[320px] w-[70vw] md:w-full ${
+                mode === "light"
+                  ? "bg-white text-veryDarkBlue"
+                  : "bg-veryDarkBlue text-white"
+              }`}
               type="text"
               placeholder="Filter by location…"
             />
@@ -110,13 +130,21 @@ const Filters = ({
                   fullTime: e.target.checked,
                 }))
               }
-              className="appearance-none w-6 h-6 bg-withOpacity checked:bg-purple checked:after:content-['✔']
-              checked:after:text-white checked:after:ml-[6.5px] cursor-pointer"
+              className={`appearance-none w-6 h-6 bg-opacity-[0.1035] ${
+                mode === "light" ? "bg-veryDarkBlue" : "bg-white"
+              } rounded-[3px] checked:bg-purple checked:after:content-['✔']
+              checked:after:text-white checked:after:ml-[6.5px] cursor-pointer`}
               type="checkbox"
+              id="fullTimeCheckbox"
             />
-            <h3>
+            <label
+              htmlFor="fullTimeCheckbox"
+              className={`${
+                mode === "light" ? "text-veryDarkBlue" : "text-white"
+              }`}
+            >
               Full Time <span className="md:hidden"> Only</span>{" "}
-            </h3>
+            </label>
           </div>
           <div className="px-6 w-full md:p-0 md:ml-[26px] md:w-[19%]">
             <button

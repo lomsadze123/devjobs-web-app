@@ -1,6 +1,12 @@
 import logo from "../assets/other/logo.svg";
 
-const Header = () => {
+const Header = ({
+  handleMode,
+  mode,
+}: {
+  handleMode: () => void;
+  mode: string;
+}) => {
   return (
     <header className="bg-mobile flex justify-between px-6 md:px-28 pt-8 pb-[76px] md:rounded-bl-[100px]">
       <img src={logo} alt="dev jobs logo icon" />
@@ -10,6 +16,7 @@ const Header = () => {
         height="24"
         viewBox="0 0 112 24"
         fill="none"
+        onClick={handleMode}
       >
         <rect
           x="36"
@@ -20,11 +27,11 @@ const Header = () => {
           className="cursor-pointer"
         />
         <circle
-          cx="48"
+          cx={mode === "light" ? 48 : 70}
           cy="12"
           r="7"
           fill="#5964E0"
-          className="cursor-pointer"
+          className="cursor-pointer transition-all"
         />
         <path
           fillRule="evenodd"

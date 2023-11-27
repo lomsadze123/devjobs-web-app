@@ -16,6 +16,8 @@ const App = () => {
     fullTime: false,
   });
   const location = useLocation();
+  const [mode, setMode] = useState("light");
+  const storage = localStorage.getItem("mode") ?? "light";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,29 +30,41 @@ const App = () => {
     };
     fetchData();
 
-    // make responsive better
-    const query = window.matchMedia("(min-width: 768px)");
-    const handleQuery = (e: MediaQueryListEvent) => {
-      setWidth(e.matches);
-    };
-    query.addEventListener("change", handleQuery);
-    setWidth(query.matches);
+    setMode(storage);
 
+    // make responsive better
+    const handleQuery = () => {
+      setWidth(window.innerWidth >= 768);
+    };
+    window.addEventListener("resize", handleQuery);
     return () => {
-      query.removeEventListener("change", handleQuery);
+      window.removeEventListener("resize", handleQuery);
     };
   }, []);
 
+  const handleMode = () => {
+    const updateMode = mode === "light" ? "dark" : "light";
+    localStorage.setItem("mode", updateMode);
+    setMode(updateMode);
+  };
+
   return (
-    <div className="min-h-screen bg-[#F4F6F8] overflow-hidden pb-4 md:pb-8">
-      <Header />
+    <div
+      className={`min-h-screen ${
+        mode === "light" ? "bg-[#F4F6F8]" : "bg-[#121721]"
+      } overflow-hidden pb-4 md:pb-8`}
+    >
+      <Header handleMode={handleMode} mode={mode} />
       <div className="px-6 md:p-0">
         {location.pathname === "/" && (
-          <Filters width={width} setSearch={setSearch} />
+          <Filters width={width} setSearch={setSearch} mode={mode} />
         )}
         <Routes>
-          <Route path="/" element={<Main data={data} search={search} />} />
-          <Route path="/job/:id" element={<Job data={data} />} />
+          <Route
+            path="/"
+            element={<Main data={data} search={search} mode={mode} />}
+          />
+          <Route path="/job/:id" element={<Job data={data} mode={mode} />} />
         </Routes>
       </div>
     </div>

@@ -13,7 +13,6 @@ export default {
         purple: "#5964E0",
         veryDarkBlue: "#19202D",
         darkGrey: "#6E8098",
-        withOpacity: "rgba(25, 32, 45, 0.1035)"
       }
     },
   },

@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export interface WithNull {
   data: DataType[] | null;
+  mode: string;
 }
 
 interface AddTypes extends WithNull {
@@ -15,7 +16,7 @@ interface AddTypes extends WithNull {
   };
 }
 
-const Main = ({ data, search }: AddTypes) => {
+const Main = ({ data, search, mode }: AddTypes) => {
   const [load, setLoad] = useState(6);
   const check =
     search.title.length > 0 ||
@@ -33,7 +34,11 @@ const Main = ({ data, search }: AddTypes) => {
               .includes(search.location.toLowerCase()) &&
             (!search.fullTime || items.contract === "Full Time") && (
               <Link to={`/job/${items.id}`} key={items.id}>
-                <div className="bg-white text-darkGrey pl-6 pb-9 rounded-md w-[350px] group">
+                <div
+                  className={` ${
+                    mode === "light" ? "bg-white" : "bg-veryDarkBlue"
+                  } text-darkGrey pl-6 pb-9 rounded-md w-[350px] group`}
+                >
                   <img
                     className="w-[50px] h-auto inline-block mt-[-27.5px]"
                     src={Logos[items.company.toLowerCase()]}
@@ -43,7 +48,11 @@ const Main = ({ data, search }: AddTypes) => {
                     <li>{items.postedAt}</li>
                     <li className="list-disc">{items.contract}</li>
                   </ul>
-                  <h2 className="text-veryDarkBlue my-[10px] text-xl group-hover:text-darkGrey">
+                  <h2
+                    className={` ${
+                      mode === "light" ? "text-veryDarkBlue" : "text-white"
+                    } my-[10px] text-xl group-hover:text-darkGrey`}
+                  >
                     {items.position}
                   </h2>
                   <p>{items.company}</p>
